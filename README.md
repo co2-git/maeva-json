@@ -16,7 +16,7 @@ data.connect(json());
 const usersModel = data.model('users', {email: String});
 
 // fire queries
-const user = await data.findOne(usersModel, {email: 'joe@doe.com'});
+const user = await data.insertOne(usersModel, {email: 'joe@doe.com'});
 // {id: 1, "email": "joe@doe.com"}
 ```
 
