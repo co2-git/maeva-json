@@ -1,8 +1,9 @@
 import includes from 'lodash/includes';
+import set from 'lodash/set';
 
 import collections from '../collections';
 
-const updateByIds = (ids, updater, model) => new Promise((resolve, reject) => {
+const updateByIds = (ids, updaters, model) => new Promise((resolve, reject) => {
   try {
     let collection = collections[model.name];
     if (!collection) {
@@ -12,17 +13,25 @@ const updateByIds = (ids, updater, model) => new Promise((resolve, reject) => {
       };
       collection = collections[model.name];
     }
-    let doc;
+    const docs = [];
     collection.documents = collection.documents.map(
       document => {
         if (includes(ids, document.id)) {
-          doc = {...document, ...updater};
+          const doc = document;
+          for (const updater of updaters) {
+            switch (updater.operator) {
+            case 'set':
+              set(doc, updater.field, updater.value);
+              break;
+            }
+          }
+          docs.push(doc);
           return doc;
         }
         return document;
       }
     );
-    resolve(doc);
+    resolve(docs);
   } catch (error) {
     reject(error);
   }

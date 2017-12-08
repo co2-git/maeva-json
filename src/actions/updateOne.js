@@ -1,8 +1,10 @@
+import first from 'lodash/first';
+import set from 'lodash/set';
+
 import collections from '../collections';
 import find from '../lib/find';
-import first from '../lib/first';
 
-const updateOne = (query, updater, model) => new Promise((resolve, reject) => {
+const updateOne = (query, updaters, model) => new Promise((resolve, reject) => {
   try {
     let collection = collections[model.name];
     if (!collection) {
@@ -16,11 +18,18 @@ const updateOne = (query, updater, model) => new Promise((resolve, reject) => {
     collection.documents = collection.documents.map(
       document => {
         if (document.id === doc.id) {
-          return {...document, ...updater};
+          for (const updater of updaters) {
+            switch (updater.operator) {
+            case 'set':
+              set(document, updater.field, updater.value);
+              break;
+            }
+          }
         }
         return document;
       }
     );
+    resolve(doc);
   } catch (error) {
     reject(error);
   }

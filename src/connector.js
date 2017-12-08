@@ -38,22 +38,7 @@ export default () => ({
   },
   id: {
     name: 'id',
-    type: {
-      convert: value => {
-        if (typeof value === 'number') {
-          return value;
-        }
-        if (typeof value === 'object' && ('id' in value)) {
-          return value.id;
-        }
-        return Number(value);
-      },
-      validate: value => {
-        if (isNaN(value)) {
-          throw new Error('Id must be an id');
-        }
-      }
-    },
+    type: Number,
   },
   emitter,
 });

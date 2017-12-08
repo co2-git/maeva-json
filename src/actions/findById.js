@@ -13,7 +13,14 @@ const findById = (id, model) => new Promise((resolve, reject) => {
       };
       collection = collections[model.name];
     }
-    const docs = find(collection.documents, {id});
+    const query = [
+      {
+        field: 'id',
+        operator: 'is',
+        value: id
+      }
+    ];
+    const docs = find(collection.documents, query);
     resolve(first(docs));
   } catch (error) {
     reject(error);

@@ -1,3 +1,5 @@
+import first from 'lodash/first';
+
 import collections from '../collections';
 import find from '../lib/find';
 
@@ -11,7 +13,14 @@ const removeById = (id, model) => new Promise((resolve, reject) => {
       };
       collection = collections[model.name];
     }
-    const removed = find(collection.documents, {id});
+    const query = [
+      {
+        field: 'id',
+        operator: 'is',
+        value: id
+      }
+    ];
+    const removed = first(find(collection.documents, query));
     collection.documents = collection.documents.filter(
       document => document.id !== removed.id
     );
