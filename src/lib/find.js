@@ -1,7 +1,6 @@
 import every from 'lodash/every';
 import get from 'lodash/get';
 import isEqual from 'lodash/isEqual';
-import last from 'lodash/last';
 import orderBy from 'lodash/orderBy';
 import some from 'lodash/some';
 import take from 'lodash/take';
