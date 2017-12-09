@@ -16,6 +16,7 @@ import updateOne from './actions/updateOne';
 import updateMany from './actions/updateMany';
 
 export default () => ({
+  name: 'json',
   actions: {
     connect: () => {
       setTimeout(() => emitter.emit('connected'));
@@ -39,6 +40,7 @@ export default () => ({
   id: {
     name: 'id',
     type: Number,
+    isEqual: (idA, idB) => Number(idA) === Number(idB),
   },
   emitter,
 });
