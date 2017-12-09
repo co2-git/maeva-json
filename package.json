@@ -7,14 +7,14 @@
     "babel-cli": "^6.26.0",
     "babel-env": "^2.4.1",
     "babel-eslint": "^8.0.3",
-    "eslint": "^4.12.1"
+    "eslint": "^4.12.1",
+    "mocha": "^4.0.1"
   },
   "dependencies": {
     "lodash": "^4.17.4"
   },
   "scripts": {
     "babel": "rm -rf dist && babel --out-dir dist/ src/",
-    "babel:watch": "rm -rf dist && babel --watch --out-dir dist/ src/",
-    "test": "eslint src"
+    "babel:watch": "rm -rf dist && babel --watch --out-dir dist/ src/"
   }
 }
