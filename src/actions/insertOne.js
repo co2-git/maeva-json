@@ -1,6 +1,7 @@
 import collections from '../collections';
+import insert from '../lib/insert';
 
-const insertOne = (doc, model) => new Promise((resolve, reject) => {
+const insertOne = (fields, model) => new Promise((resolve, reject) => {
   try {
     let collection = collections[model.name];
     if (!collection) {
@@ -10,7 +11,7 @@ const insertOne = (doc, model) => new Promise((resolve, reject) => {
       };
       collection = collections[model.name];
     }
-    const newDoc = {...doc, id: collection.id++};
+    const newDoc = {...insert(fields), id: collection.id++};
     collection.documents.push(newDoc);
     resolve(newDoc);
   } catch (error) {

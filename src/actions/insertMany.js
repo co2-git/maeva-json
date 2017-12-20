@@ -1,4 +1,5 @@
 import collections from '../collections';
+import insert from '../lib/insert';
 
 const insertMany = (docs, model) => new Promise((resolve, reject) => {
   try {
@@ -10,7 +11,10 @@ const insertMany = (docs, model) => new Promise((resolve, reject) => {
       };
       collection = collections[model.name];
     }
-    const $docs = docs.map(doc => ({...doc, id: collection.id++}));
+    const $docs = [];
+    for (const fields of docs) {
+      $docs.push({id: collection.id++, ...insert(fields)});
+    }
     collection.documents.push(...$docs);
     resolve($docs);
   } catch (error) {

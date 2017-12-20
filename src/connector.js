@@ -37,10 +37,6 @@ export default () => ({
     updateOne,
     updateMany,
   },
-  id: {
-    name: 'id',
-    type: Number,
-    isEqual: (idA, idB) => Number(idA) === Number(idB),
-  },
+  idName: 'id',
   emitter,
 });

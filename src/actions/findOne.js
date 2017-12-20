@@ -14,7 +14,7 @@ const findOne = (query, model) => new Promise((resolve, reject) => {
       collection = collections[model.name];
     }
     const docs = find(collection.documents, query);
-    resolve(first(docs));
+    resolve(first(docs) || null);
   } catch (error) {
     reject(error);
   }
