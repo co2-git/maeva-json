@@ -15,7 +15,7 @@ import updateByIds from './actions/updateByIds';
 import updateOne from './actions/updateOne';
 import updateMany from './actions/updateMany';
 
-export default () => ({
+const maevaJSONConnector = () => ({
   name: 'json',
   actions: {
     connect: () => {
@@ -40,3 +40,5 @@ export default () => ({
   idName: 'id',
   emitter,
 });
+
+export default maevaJSONConnector;
