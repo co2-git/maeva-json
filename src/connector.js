@@ -21,6 +21,9 @@ const maevaJSONConnector = () => ({
     connect: () => {
       setTimeout(() => emitter.emit('connected'));
     },
+    disconnect: () => {
+      setTimeout(() => emitter.emit('disconnected'));
+    },
     count,
     findById,
     findByIds,
